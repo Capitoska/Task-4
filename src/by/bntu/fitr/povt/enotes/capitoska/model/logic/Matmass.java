@@ -1,69 +1,77 @@
 package by.bntu.fitr.povt.enotes.capitoska.model.logic;
 
+import by.bntu.fitr.povt.enotes.capitoska.model.entity.Matrix;
+
 public class Matmass {
 
     /**
-     * @param mass
+     * @param matrix
      * @return new array with replace local max on number 0
      */
-    public static int[][] replaceMaxNum(int[][]mass){
-        int changeMass [][] = mass;
+    public final static int REPLACED_NUMBER = 0;
+
+    public static Matrix replaceMaxNum(Matrix matrix) {
+        Matrix changeMatrix = new Matrix(matrix);
         // проверяем элементы внутри массива
-        for(int i=1;i<mass.length -1 ;i++){
-            for(int k = 1;k<mass.length -1 ;k++)
-            {
-                if(mass[i][k]>mass[i][k+1] && mass[i][k] > mass[i][k-1] &&
-                        mass[i][k] > mass[i+1][k] && mass[i][k]>mass[i-1][k]){
-                    changeMass[i][k] = 0;
+        for (int i = 1; i < matrix.lengthofRow() - 1; i++) {
+            for (int k = 1; k < matrix.lengthofColumn() - 1; k++) {
+                if (matrix.getElement(i, k) > matrix.getElement(i, k + 1) &&
+                        matrix.getElement(i, k) > matrix.getElement(i, k - 1) &&
+                        matrix.getElement(i, k) > matrix.getElement(i + 1, k) &&
+                        matrix.getElement(i, k) > matrix.getElement(i - 1, k)) {
+                    changeMatrix.setElement(REPLACED_NUMBER, i, k);
                 }
             }
         }
 
-        /**
-         *
-         * mass[1][y]
-         * mass[1][0]
-         * mass[y][1]
-         * mass[0][1]
-         *
-         *
-         * 1 3 3 6 7
-         * 2 9 5 2 7
-         * 2 8 3 3 1
-         * 4 6 3 1 7
-         * 9 8 1 0 3
-         */
-        for(int i = 1; i <mass.length-1; i++){
-            if (mass[i][0] > mass[i+1][0] && mass[i][0]>mass[i-1][0] && mass[i][0] > mass[i][1]){
-                changeMass[i][0] = 0;
-            }
-            if (mass[i][mass.length-1] > mass[i+1][mass.length-1] && mass[i][mass.length-1]>mass[i-1][mass.length-2] &&
-                    mass[i][mass.length-1] > mass[i][mass.length-2]){
-                changeMass[i][mass.length-1] = 0;
-            }
-            if (mass[0][i] > mass[0][i+1] && mass[0][i]>mass[0][i-1] && mass[0][i] > mass[1][i]){
-                changeMass[0][i] = 0;
+
+        for (int i = 1; i < matrix.lengthofRow() - 1; i++) {
+            if (isBiggestVertical(matrix, i, 0)) {
+                changeMatrix.setElement(REPLACED_NUMBER, i, 0);
             }
 
-            if (mass[mass.length-1][i] > mass[mass.length-1][i+1] && mass[mass.length-1][i]>mass[mass.length-2][i-1] &&
-                    mass[mass.length-1][i] > mass[mass.length-2][i]){
-                changeMass[mass.length-1][i] = 0;
+            if (isBiggestVertical(matrix, i, matrix.lengthofColumn() - 1)) {
+                changeMatrix.setElement(REPLACED_NUMBER, i, matrix.lengthofColumn() - 1);
             }
+
+            if (matrix.getElement(0, i) > matrix.getElement(0, i + 1) &&
+                    matrix.getElement(0, i) > matrix.getElement(0, i - 1) &&
+                    matrix.getElement(0, i) > matrix.getElement(1, i)) {
+                changeMatrix.setElement(REPLACED_NUMBER, 0, i);
+            }
+
+            if (matrix.getElement(matrix.lengthofRow() - 1, i) > matrix.getElement(matrix.lengthofRow() - 1,
+                    i + 1) &&
+                    matrix.getElement(matrix.lengthofRow() - 1, i) > matrix.getElement(matrix.lengthofRow() - 2,
+                            i - 1) &&
+                    matrix.getElement(matrix.lengthofRow() - 1, i) > matrix.getElement(matrix.lengthofRow() - 2,
+                            i)) {
+                changeMatrix.setElement(REPLACED_NUMBER, matrix.lengthofRow() - 1, i);
+            }
+
+           /* if (mass[mass.length - 1][i] > mass[mass.length - 1][i + 1] && mass[mass.length - 1][i] > mass[mass.length - 2][i - 1] &&
+                    mass[mass.length - 1][i] > mass[mass.length - 2][i]) {
+                changeMass[mass.length - 1][i] = 0;
+            }
+            */
+
 
         }
-        return changeMass;
+        return changeMatrix;
     }
-/*
-    public static boolean isBiggestVertical(int[][] mass, int x, int y){
 
-        return (mass[x][y] > mass[x+1][y] && mass[x][y]>mass[x-1][y] && mass[x][y] > mass[x][y+x==mass.length?-1:1]);
+    public static boolean isBiggestVertical(Matrix matrix, int row, int column) {
+
+        return (matrix.getElement(row, column) > matrix.getElement(row + 1, column) &&
+                matrix.getElement(row, column) > matrix.getElement(row - 1, column) &&
+                matrix.getElement(row, column) > matrix.getElement(row, column + row == matrix.lengthofRow() ? -1 : 1));
+        //mass[x][y + x == mass.length ? -1 : 1]);
     }
-*/
 
-    public static boolean isSimmetrical(int [][]mass){
-        for(int i=0; i<mass.length;i++){
-            for(int k=0; k<mass.length;k++){
-                if(mass[k][i] !=mass[i][k]){
+    public static boolean isSimmetrical(Matrix matrix) {
+        for (int i = 0; i < matrix.lengthofRow(); i++) {
+            for (int k = 0; k < matrix.lengthofColumn(); k++) {
+                if (matrix.getElement(k, i) != matrix.getElement(i, k)) {
                     return false;
                 }
             }
