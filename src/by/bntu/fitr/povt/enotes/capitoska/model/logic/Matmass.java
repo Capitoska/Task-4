@@ -24,6 +24,24 @@ public class Matmass {
             }
         }
 
+        if(matrix.getElement(0,0)>matrix.getElement(1,0) &&
+                matrix.getElement(0,0)> matrix.getElement(0,1)){
+            changeMatrix.setElement(REPLACED_NUMBER, 0, 0);
+        }
+
+        if(matrix.getElement(matrix.lengthofRow()-1,0)>matrix.getElement(matrix.lengthofRow()-2,0)
+                && matrix.getElement(matrix.lengthofRow()
+                -1,0)> matrix.getElement(matrix.lengthofRow()-1,1)){
+            changeMatrix.setElement(REPLACED_NUMBER, matrix.lengthofRow()-1, 0);
+        }
+        if(matrix.getElement(0,matrix.lengthofRow()-1)>matrix.getElement(0,matrix.lengthofRow()-2)
+                && matrix.getElement(0,matrix.lengthofRow()-1)> matrix.getElement(1,matrix.lengthofRow()-1)){
+            changeMatrix.setElement(REPLACED_NUMBER, 0, matrix.lengthofRow()-1);
+        }
+        if(matrix.getElement(matrix.lengthofRow()-1,matrix.lengthofColumn()-1)>matrix.getElement(matrix.lengthofRow()-2,matrix.lengthofColumn()-2)&&
+                matrix.getElement(matrix.lengthofRow()-1,matrix.lengthofColumn()-1)> matrix.getElement(matrix.lengthofRow()-1,matrix.lengthofColumn()-2)){
+            changeMatrix.setElement(REPLACED_NUMBER, matrix.lengthofRow()-1, matrix.lengthofColumn()-1);
+        }
 
         for (int i = 1; i < matrix.lengthofRow() - 1; i++) {
             if (isBiggestVertical(matrix, i, 0)) {
@@ -39,6 +57,7 @@ public class Matmass {
                     matrix.getElement(0, i) > matrix.getElement(1, i)) {
                 changeMatrix.setElement(REPLACED_NUMBER, 0, i);
             }
+
 
             if (matrix.getElement(matrix.lengthofRow() - 1, i) > matrix.getElement(matrix.lengthofRow() - 1,
                     i + 1) &&

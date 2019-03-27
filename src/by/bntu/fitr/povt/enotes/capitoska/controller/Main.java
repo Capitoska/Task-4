@@ -1,5 +1,6 @@
 package by.bntu.fitr.povt.enotes.capitoska.controller;
 
+import by.bntu.fitr.povt.enotes.capitoska.model.entity.Matrix;
 import by.bntu.fitr.povt.enotes.capitoska.model.logic.Matmass;
 import by.bntu.fitr.povt.enotes.capitoska.view.Print;
 
@@ -16,10 +17,22 @@ public class Main {
             mass[3][4] = 5;
             mass[2][0] = 5;
         }
+        Matrix matrix2 = new Matrix(new int[][]{
+                {8, 12, 2},
+                {23, 53, 14},
+                {28, 1, 87}});
+        Matrix matrix3 = new Matrix(new int[][]{
+                {8, 12, 2},
+                {23, 53, 14},
+                {28, 1, 87}});
+        Matrix matrix1 = new Matrix(new int[][]{
+                {3, 4, 6},
+                {8, 3, 2},
+                {2, 5, 9}});
         Print.printMass(mass);
-        //mass = Matmass.replaceMaxNum(mass);
+        matrix2 = Matmass.replaceMaxNum(matrix1);
         System.out.println("\n\n\n\"");
-        Print.printMass(mass);
+        System.out.println(matrix2);
 
     }
 

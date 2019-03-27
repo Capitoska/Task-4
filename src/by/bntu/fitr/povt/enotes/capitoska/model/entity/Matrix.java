@@ -19,6 +19,19 @@ public class Matrix {
         this(DEFAULT_SIZE, DEFAULT_SIZE);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Matrix matrix = (Matrix) o;
+        return Arrays.equals(array, matrix.array);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(array);
+    }
+
     public Matrix(Matrix matrix) {
         this(matrix.array.length, matrix.array[0].length);
 
@@ -27,6 +40,7 @@ public class Matrix {
                 this.array[i][j] = matrix.array[i][j];
             }
         }
+
     }
 
     public void setElement(int value, int row, int column) {
@@ -47,8 +61,13 @@ public class Matrix {
 
     @Override
     public String toString() {
-        return "Matrix{\n" +
-                "array=" + Arrays.toString(array) +
-                '}';
-    }
+            StringBuilder stringBuilder = new StringBuilder();
+            for(int i = 0; i < lengthofRow();i++){
+                for (int k = 0 ; k < lengthofColumn(); k++){
+                    stringBuilder.append(array[i][k]).append(" ");
+                }
+                stringBuilder.append("\n");
+            }
+            return stringBuilder.toString();
+     }
 }
