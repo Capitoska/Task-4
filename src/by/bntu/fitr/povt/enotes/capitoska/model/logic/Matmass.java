@@ -35,11 +35,14 @@ public class Matmass {
             changeMatrix.setElement(REPLACED_NUMBER, matrix.lengthofRow()-1, 0);
         }
         if(matrix.getElement(0,matrix.lengthofRow()-1)>matrix.getElement(0,matrix.lengthofRow()-2)
-                && matrix.getElement(0,matrix.lengthofRow()-1)> matrix.getElement(1,matrix.lengthofRow()-1)){
+                && matrix.getElement(0,matrix.lengthofRow()-1)> matrix.getElement(1,
+                matrix.lengthofRow()-1)){
             changeMatrix.setElement(REPLACED_NUMBER, 0, matrix.lengthofRow()-1);
         }
-        if(matrix.getElement(matrix.lengthofRow()-1,matrix.lengthofColumn()-1)>matrix.getElement(matrix.lengthofRow()-2,matrix.lengthofColumn()-2)&&
-                matrix.getElement(matrix.lengthofRow()-1,matrix.lengthofColumn()-1)> matrix.getElement(matrix.lengthofRow()-1,matrix.lengthofColumn()-2)){
+        if(matrix.getElement(matrix.lengthofRow()-1,matrix.lengthofColumn()-1)>matrix.getElement(
+                matrix.lengthofRow()-2,matrix.lengthofColumn()-2)&&
+                matrix.getElement(matrix.lengthofRow()-1,matrix.lengthofColumn()-1)> matrix.getElement(
+                        matrix.lengthofRow()-1,matrix.lengthofColumn()-2)){
             changeMatrix.setElement(REPLACED_NUMBER, matrix.lengthofRow()-1, matrix.lengthofColumn()-1);
         }
 
