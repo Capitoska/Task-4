@@ -33,14 +33,32 @@ class MatmassTest {
 
 
     @Test
-    void replaceMaxNum() {
-        assertEquals(Matmass.replaceMaxNum(matrix1).toString(),matrix1Answer.toString());
-        assertEquals(Matmass.replaceMaxNum(matrix2).toString(),matrix2Answwer.toString());
-        assertEquals(Matmass.replaceMaxNum(matrix3).toString(),matrix3Answer.toString());
+    void replaceMaxNum1() {
+        assertEquals(Matmass.replaceMaxNum(matrix1).toString(), matrix1Answer.toString());
     }
-    @Test void isBiggestVertical() {
-        assertEquals(Matmass.isBiggestVertical(matrix1,1,0),true);
-        assertEquals(Matmass.isBiggestVertical(matrix2,1,0),false);
-        assertEquals(Matmass.isBiggestVertical(matrix3,1,0),false);
+
+    @Test
+    void replaceMaxNum2() {
+        assertEquals(Matmass.replaceMaxNum(matrix2).toString(), matrix2Answwer.toString());
+    }
+
+    @Test
+    void replaceMaxNum3() {
+        assertEquals(Matmass.replaceMaxNum(matrix3).toString(), matrix3Answer.toString());
+    }
+
+    @Test
+    void isBiggestVertical() {
+        assertEquals(Matmass.isBiggestVertical(matrix2, 1, 0), false);
+    }
+
+    @Test
+    void isBiggestVertical1() {
+        assertEquals(Matmass.isBiggestVertical(matrix1, 1, 0), true);
+    }
+
+    @Test
+    void isBiggestVertical2() {
+        assertEquals(Matmass.isBiggestVertical(matrix3, 1, 0), false);
     }
 }
