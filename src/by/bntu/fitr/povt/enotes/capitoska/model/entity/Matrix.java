@@ -61,13 +61,13 @@ public class Matrix {
 
     @Override
     public String toString() {
-            StringBuilder stringBuilder = new StringBuilder();
-            for(int i = 0; i < lengthofRow();i++){
-                for (int k = 0 ; k < lengthofColumn(); k++){
-                    stringBuilder.append(array[i][k]).append(" ");
-                }
-                stringBuilder.append("\n");
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < lengthofRow(); i++) {
+            for (int k = 0; k < lengthofColumn(); k++) {
+                stringBuilder.append(array[i][k]).append(" ");
             }
-            return stringBuilder.toString();
-     }
+            stringBuilder.append("\n");
+        }
+        return stringBuilder.toString();
+    }
 }

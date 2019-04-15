@@ -1,6 +1,7 @@
 package by.bntu.fitr.povt.enotes.capitoska.model.logic;
 
 import by.bntu.fitr.povt.enotes.capitoska.model.entity.Matrix;
+import by.bntu.fitr.povt.enotes.capitoska.model.exceptions.NullException;
 
 public class Matmass {
 
@@ -10,7 +11,10 @@ public class Matmass {
      */
     public final static int REPLACED_NUMBER = 0;
 
-    public static Matrix replaceMaxNum(Matrix matrix) {
+    public static boolean replaceAndCheck(Matrix matrix) throws NullException{
+        return isSimmetrical(replaceMaxNum(matrix));
+    }
+    public static Matrix replaceMaxNum(Matrix matrix) throws NullException {
         Matrix changeMatrix = new Matrix(matrix);
         // проверяем элементы внутри массива
         for (int i = 1; i < matrix.lengthofRow() - 1; i++) {
@@ -24,26 +28,26 @@ public class Matmass {
             }
         }
 
-        if(matrix.getElement(0,0)>matrix.getElement(1,0) &&
-                matrix.getElement(0,0)> matrix.getElement(0,1)){
+        if (matrix.getElement(0, 0) > matrix.getElement(1, 0) &&
+                matrix.getElement(0, 0) > matrix.getElement(0, 1)) {
             changeMatrix.setElement(REPLACED_NUMBER, 0, 0);
         }
 
-        if(matrix.getElement(matrix.lengthofRow()-1,0)>matrix.getElement(matrix.lengthofRow()-2,0)
+        if (matrix.getElement(matrix.lengthofRow() - 1, 0) > matrix.getElement(matrix.lengthofRow() - 2, 0)
                 && matrix.getElement(matrix.lengthofRow()
-                -1,0)> matrix.getElement(matrix.lengthofRow()-1,1)){
-            changeMatrix.setElement(REPLACED_NUMBER, matrix.lengthofRow()-1, 0);
+                - 1, 0) > matrix.getElement(matrix.lengthofRow() - 1, 1)) {
+            changeMatrix.setElement(REPLACED_NUMBER, matrix.lengthofRow() - 1, 0);
         }
-        if(matrix.getElement(0,matrix.lengthofRow()-1)>matrix.getElement(0,matrix.lengthofRow()-2)
-                && matrix.getElement(0,matrix.lengthofRow()-1)> matrix.getElement(1,
-                matrix.lengthofRow()-1)){
-            changeMatrix.setElement(REPLACED_NUMBER, 0, matrix.lengthofRow()-1);
+        if (matrix.getElement(0, matrix.lengthofRow() - 1) > matrix.getElement(0, matrix.lengthofRow() - 2)
+                && matrix.getElement(0, matrix.lengthofRow() - 1) > matrix.getElement(1,
+                matrix.lengthofRow() - 1)) {
+            changeMatrix.setElement(REPLACED_NUMBER, 0, matrix.lengthofRow() - 1);
         }
-        if(matrix.getElement(matrix.lengthofRow()-1,matrix.lengthofColumn()-1)>matrix.getElement(
-                matrix.lengthofRow()-2,matrix.lengthofColumn()-2)&&
-                matrix.getElement(matrix.lengthofRow()-1,matrix.lengthofColumn()-1)> matrix.getElement(
-                        matrix.lengthofRow()-1,matrix.lengthofColumn()-2)){
-            changeMatrix.setElement(REPLACED_NUMBER, matrix.lengthofRow()-1, matrix.lengthofColumn()-1);
+        if (matrix.getElement(matrix.lengthofRow() - 1, matrix.lengthofColumn() - 1) > matrix.getElement(
+                matrix.lengthofRow() - 2, matrix.lengthofColumn() - 2) &&
+                matrix.getElement(matrix.lengthofRow() - 1, matrix.lengthofColumn() - 1) > matrix.getElement(
+                        matrix.lengthofRow() - 1, matrix.lengthofColumn() - 2)) {
+            changeMatrix.setElement(REPLACED_NUMBER, matrix.lengthofRow() - 1, matrix.lengthofColumn() - 1);
         }
 
         for (int i = 1; i < matrix.lengthofRow() - 1; i++) {
@@ -82,15 +86,22 @@ public class Matmass {
         return changeMatrix;
     }
 
-    public static boolean isBiggestVertical(Matrix matrix, int row, int column) {
+    protected static void isEmpty(Matrix matrix) throws NullException {
+        if (matrix == null) {
+            throw new NullException();
+        }
+    }
 
+    public static boolean isBiggestVertical(Matrix matrix, int row, int column) throws NullException {
+        isEmpty(matrix);
         return (matrix.getElement(row, column) > matrix.getElement(row + 1, column) &&
                 matrix.getElement(row, column) > matrix.getElement(row - 1, column) &&
                 matrix.getElement(row, column) > matrix.getElement(row, column + row == matrix.lengthofRow() ? -1 : 1));
         //mass[x][y + x == mass.length ? -1 : 1]);
     }
 
-    public static boolean isSimmetrical(Matrix matrix) {
+    public static boolean isSimmetrical(Matrix matrix) throws NullException {
+        isEmpty(matrix);
         for (int i = 0; i < matrix.lengthofRow(); i++) {
             for (int k = 0; k < matrix.lengthofColumn(); k++) {
                 if (matrix.getElement(k, i) != matrix.getElement(i, k)) {

@@ -30,7 +30,6 @@ public class Main {
                 {8, 3, 2},
                 {2, 5, 9}});
         Print.printMass(mass);
-        matrix2 = Matmass.replaceMaxNum(matrix1);
         System.out.println("\n\n\n\"");
         System.out.println(matrix2);
 
